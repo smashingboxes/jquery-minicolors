@@ -451,7 +451,7 @@ if(jQuery) (function($) {
 		});
 
 		// Handle change event
-		doChange(input, hex, opacity);
+    doChange(input, hex, opacity, true);
 
 	}
 
@@ -584,13 +584,13 @@ if(jQuery) (function($) {
 
 		// Fire change event, but only if minicolors is fully initialized
 		if( input.data('minicolors-initialized') ) {
-			doChange(input, hex, opacity);
+      doChange(input, hex, opacity, false);
 		}
 
 	}
 
 	// Runs the change and changeDelay callbacks
-	function doChange(input, hex, opacity) {
+  function doChange(input, hex, opacity, notify) {
 
 		var settings = input.data('minicolors-settings'),
 			lastChange = input.data('minicolors-lastChange');
