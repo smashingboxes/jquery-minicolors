@@ -466,7 +466,7 @@
         });
 
         // Handle change event
-        doChange(input, hex, opacity);
+        doChange(input, hex, opacity, true);
 
     }
 
@@ -599,13 +599,13 @@
 
         // Fire change event, but only if minicolors is fully initialized
         if( input.data('minicolors-initialized') ) {
-            doChange(input, hex, opacity);
+            doChange(input, hex, opacity, false);
         }
 
     }
 
     // Runs the change and changeDelay callbacks
-    function doChange(input, hex, opacity) {
+    function doChange(input, hex, opacity, notify) {
 
         var settings = input.data('minicolors-settings'),
             lastChange = input.data('minicolors-lastChange');
@@ -620,7 +620,7 @@
             });
 
             // Fire change event
-            if( settings.change ) {
+            if( settings.change && notify) {
                 if( settings.changeDelay ) {
                     // Call after a delay
                     clearTimeout(input.data('minicolors-changeTimeout'));
@@ -632,7 +632,9 @@
                     settings.change.call(input.get(0), hex, opacity);
                 }
             }
-            input.trigger('change').trigger('input');
+            if ( notify ) {
+                input.trigger('change').trigger('input');
+            }
         }
 
     }
